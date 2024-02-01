@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="robot-src:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/robot_src_jar</output-path>
+    <root id="archive" name="robot-src.jar">
+      <element id="module-output" name="robot-src" />
+      <element id="library" level="project" name="dbus" />
+    </root>
+  </artifact>
+</component>
