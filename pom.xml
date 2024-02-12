@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.coolteam</groupId>
+    <artifactId>lejos-maven</artifactId>
+    <version>1.0-super-beta-alpha-wip</version>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.github.bdeneuter</groupId>
+            <artifactId>lejos-ev3-api</artifactId>
+            <version>0.9.1-beta</version>
+        </dependency>
+    </dependencies>
+
+    <properties>
+        <maven.compiler.source>1.7</maven.compiler.source>
+        <maven.compiler.target>1.7</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>3.3.0</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <mainClass>com.coolteam.Main</mainClass>
+                            <addClasspath>true</addClasspath>
+                        </manifest>
+                        <!-- TODO: Check if this is actually needed as it may be set my the lejos dependency -->
+                        <manifestEntries>
+                            <Class-Path>/usr/share/java/jna.jar /home/root/lejos/libjna/ /home/root/lejos/lib/ev3classes.jar</Class-Path>
+                        </manifestEntries>
+                    </archive>
+                    <descriptorRefs>
+                        <descriptorRefs>jar-with-dependencies</descriptorRefs>
+                    </descriptorRefs>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>
