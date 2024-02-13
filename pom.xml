@@ -5,8 +5,8 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.coolteam</groupId>
-    <artifactId>lejos-maven</artifactId>
-    <version>1.0-super-beta-alpha-wip</version>
+    <artifactId>henry-code</artifactId>
+    <version>1.0-maven-finally-works</version>
 
     <dependencies>
         <dependency>
@@ -17,15 +17,16 @@
     </dependencies>
 
     <properties>
-        <maven.compiler.source>1.7</maven.compiler.source>
-        <maven.compiler.target>1.7</maven.compiler.target>
+        <maven.compiler.source>7</maven.compiler.source>
+        <maven.compiler.target>7</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
     <build>
         <plugins>
             <plugin>
-                <artifactId>maven-assembly-plugin</artifactId>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
                 <version>3.3.0</version>
                 <configuration>
                     <archive>
@@ -33,23 +34,8 @@
                             <mainClass>com.coolteam.Main</mainClass>
                             <addClasspath>true</addClasspath>
                         </manifest>
-                        <!-- TODO: Check if this is actually needed as it may be set my the lejos dependency -->
-                        <manifestEntries>
-                            <Class-Path>/usr/share/java/jna.jar /home/root/lejos/libjna/ /home/root/lejos/lib/ev3classes.jar</Class-Path>
-                        </manifestEntries>
                     </archive>
-                    <descriptorRefs>
-                        <descriptorRefs>jar-with-dependencies</descriptorRefs>
-                    </descriptorRefs>
                 </configuration>
-                <executions>
-                    <execution>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>single</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
         </plugins>
     </build>
