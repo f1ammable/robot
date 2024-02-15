@@ -40,7 +40,15 @@ public class FollowThePath {
     p = new OdometryPoseProvider(pilot);
     p.setPose(new Pose(0, 0, 90));
     n = new Navigator(pilot, p);
-    map = new LineMap(new Line[] {new Line(200, 100, 200, 50)}, new Rectangle(0, 0, 200, 200));
+    map =
+        new LineMap(
+            new Line[] {
+              new Line(50, 50, 100, 100),
+              new Line(100, 100, 100, 50),
+              new Line(100, 50, 50, 50),
+              new Line(50, 50, 50, 100)
+            },
+            new Rectangle(-400, -400, 400, 400));
 
     ShortestPathFinder s = new ShortestPathFinder(map);
     Path path_to_follow = null;
