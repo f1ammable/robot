@@ -38,14 +38,14 @@ public class FollowThePath {
     c = new WheeledChassis((new Wheel[] {w_right, w_left}), WheeledChassis.TYPE_DIFFERENTIAL);
     pilot = new MovePilot(c);
     p = new OdometryPoseProvider(pilot);
-    p.setPose(new Pose(0, 0, 0));
+    p.setPose(new Pose(0, 0, 90));
     n = new Navigator(pilot, p);
-    map = new LineMap(new Line[] {new Line(50, -40, 100, -140)}, new Rectangle(0, 0, 1000, 1000));
+    map = new LineMap(new Line[] {new Line(200, 100, 200, 50)}, new Rectangle(0, 0, 200, 200));
 
     ShortestPathFinder s = new ShortestPathFinder(map);
     Path path_to_follow = null;
     try {
-      path_to_follow = s.findRoute(p.getPose(), new Waypoint(250, -200), map);
+      path_to_follow = s.findRoute(p.getPose(), new Waypoint(200, 200), map);
     } catch (DestinationUnreachableException e) {
       LCD.drawString("Unreachable", 0, 0);
     }
