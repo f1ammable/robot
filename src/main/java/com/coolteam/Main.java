@@ -1,13 +1,9 @@
 package com.coolteam;
 
-import lejos.hardware.Button;
-import lejos.hardware.lcd.LCD;
+import com.coolteam.demos.FollowThePath;
 
 public class Main {
   public static void main(String[] args) {
-    LCD.clear();
-    while (Button.ENTER.isUp()) {
-      LCD.drawString("Hello from Maven!", 0, 0);
-    }
+    FollowThePath l = new FollowThePath();
   }
 }
