@@ -43,10 +43,10 @@ public class FollowThePath {
     map =
         new LineMap(
             new Line[] {
-              new Line(50, 50, 100, 100),
-              new Line(100, 100, 100, 50),
-              new Line(100, 50, 50, 50),
-              new Line(50, 50, 50, 100)
+              new Line(250, 250, 100, 100),
+              new Line(100, 100, 100, 250),
+              new Line(100, 250, 250, 250),
+              new Line(250, 250, 250, 100)
             },
             new Rectangle(-400, -400, 400, 400));
 
