@@ -5,8 +5,8 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.coolteam</groupId>
-    <artifactId>henry-code</artifactId>
-    <version>1.0-maven-finally-works</version>
+    <artifactId>legionnaire-mk2</artifactId>
+    <version>0.9-super-alpha</version>
 
     <dependencies>
         <dependency>

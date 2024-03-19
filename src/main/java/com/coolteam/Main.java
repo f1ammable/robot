@@ -1,9 +1,11 @@
 package com.coolteam;
 
-import com.coolteam.demos.FollowThePath;
-
 public class Main {
   public static void main(String[] args) {
-    FollowThePath l = new FollowThePath();
+    //    Behavior[] behaviors = new Behavior[] {new Picasso(), new WavePrinter()};
+    //    Arbitrator arbitrator = new Arbitrator(behaviors);
+    //    arbitrator.go();
+
+    ImageScanner s = new ImageScanner();
   }
 }
