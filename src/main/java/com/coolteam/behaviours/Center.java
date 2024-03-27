@@ -7,10 +7,8 @@ import lejos.robotics.subsumption.Behavior;
 
 public class Center implements Behavior {
   private boolean needsCentering = true;
-  private SensorManager s = new SensorManager();
-  private MotorManager m = new MotorManager();
 
-  private static final float LIGHT_THRESHOLD = 0.07f;
+  private static final float LIGHT_THRESHOLD = 0.1f;
 
   public Center() {}
 
@@ -29,9 +27,13 @@ public class Center implements Behavior {
       throw new RuntimeException(e);
     }
 
-    if (s.getAmbient() > LIGHT_THRESHOLD && s.getTouch() != 1) {
-      m.MoveX(35);
-      m.MoveY(35);
+    if (SensorManager.getAmbient() > LIGHT_THRESHOLD) MotorManager.MoveY(50);
+
+    if (SensorManager.getTouch() != 1) MotorManager.MoveX(75);
+
+    if (SensorManager.getAmbient() < LIGHT_THRESHOLD && SensorManager.getTouch() == 1) {
+      LCD.clear();
+      needsCentering = false;
     }
   }
 

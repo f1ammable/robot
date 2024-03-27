@@ -1,16 +1,18 @@
 package com.coolteam.behaviours;
 
+import lejos.hardware.Button;
 import lejos.robotics.subsumption.Behavior;
 
-public class MorseCode implements Behavior {
-
+public class StopBehaviour implements Behavior {
   @Override
   public boolean takeControl() {
-    return false;
+    return Button.ENTER.isDown();
   }
 
   @Override
-  public void action() {}
+  public void action() {
+    System.exit(-1);
+  }
 
   @Override
   public void suppress() {}
