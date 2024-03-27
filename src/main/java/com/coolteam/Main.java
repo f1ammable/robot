@@ -1,11 +1,12 @@
 package com.coolteam;
 
+import com.coolteam.behaviours.Center;
+import lejos.robotics.subsumption.Arbitrator;
+import lejos.robotics.subsumption.Behavior;
+
 public class Main {
   public static void main(String[] args) {
-    //    Behavior[] behaviors = new Behavior[] {new Picasso(), new WavePrinter()};
-    //    Arbitrator arbitrator = new Arbitrator(behaviors);
-    //    arbitrator.go();
-
-    ImageScanner s = new ImageScanner();
+    Arbitrator a = new Arbitrator(new Behavior[] {new Center()});
+    a.go();
   }
 }

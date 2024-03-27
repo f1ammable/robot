@@ -1,4 +1,4 @@
-package com.coolteam;
+package com.coolteam.behaviours;
 
 import lejos.hardware.Button;
 import lejos.robotics.subsumption.Behavior;
