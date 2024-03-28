@@ -16,7 +16,12 @@ public class Autostop implements Behavior {
   public void action() {
     LCD.clear();
     while (Button.ENTER.isUp()) {
-      LCD.drawString("Printer has been moved! Press Enter to exit", 0, 3);
+      try {
+        LCD.drawString("Printer has been moved! Press Enter to exit", 0, 3);
+        Thread.sleep(100);
+      } catch (InterruptedException e) {
+        throw new RuntimeException(e);
+      }
     }
   }
 

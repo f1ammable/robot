@@ -8,17 +8,35 @@ import lejos.hardware.sensor.NXTSoundSensor;
 import lejos.robotics.SampleProvider;
 
 public class SensorManager {
-  private static EV3TouchSensor touch = new EV3TouchSensor(SensorPort.S2);
-  private static EV3ColorSensor colour = new EV3ColorSensor(SensorPort.S1);
-  private static NXTSoundSensor sound = new NXTSoundSensor(SensorPort.S4);
-  private static EV3GyroSensor gyro = new EV3GyroSensor(SensorPort.S3);
+  // Colour Sensor
+  private static final EV3ColorSensor colour = new EV3ColorSensor(SensorPort.S1);
+  private static final SampleProvider ambient = colour.getAmbientMode();
+  private static final float[] lightSamples = new float[ambient.sampleSize()];
 
-  private static SampleProvider ambient = colour.getAmbientMode();
-  private static SampleProvider angle = gyro.getRateMode();
+  // Gyro Sensor
+  private static final EV3GyroSensor gyro = new EV3GyroSensor(SensorPort.S3);
+  private static final SampleProvider angle = gyro.getRateMode();
+  private static final float[] angleSamples = new float[angle.sampleSize()];
 
-  private static float[] touchSamples = new float[touch.sampleSize()];
-  private static float[] lightSamples = new float[ambient.sampleSize()];
-  private static float[] angleSamples = new float[angle.sampleSize()];
+  public static int getShakeCount() {
+    angle.fetchSample(angleSamples, 0);
+    float gyroValue = angleSamples[0];
+
+    if (gyroValue > 10) {
+      return 3; // Simulate multiple shakes
+    }
+
+    return 0;
+  }
+
+  // Touch Sensor
+  private static final EV3TouchSensor touch = new EV3TouchSensor(SensorPort.S2);
+  private static final float[] touchSamples = new float[touch.sampleSize()];
+
+  // Sound Sensor
+  private static final NXTSoundSensor mic = new NXTSoundSensor(SensorPort.S4);
+  private static final SampleProvider volume = mic.getDBAMode();
+  private static final float[] soundSamples = new float[volume.sampleSize()];
 
   public static void init() {
     gyro.reset();
@@ -37,5 +55,10 @@ public class SensorManager {
   public static float getAngle() {
     gyro.fetchSample(angleSamples, 0);
     return angleSamples[0];
+  }
+
+  public static float getVolume() {
+    volume.fetchSample(soundSamples, 0);
+    return soundSamples[0];
   }
 }

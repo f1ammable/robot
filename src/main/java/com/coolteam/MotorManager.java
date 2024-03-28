@@ -5,16 +5,21 @@ import lejos.hardware.motor.EV3MediumRegulatedMotor;
 import lejos.hardware.port.MotorPort;
 
 public class MotorManager {
-  private static EV3LargeRegulatedMotor x = new EV3LargeRegulatedMotor(MotorPort.A);
-  private static EV3MediumRegulatedMotor pen = new EV3MediumRegulatedMotor(MotorPort.C);
-  private static EV3LargeRegulatedMotor y = new EV3LargeRegulatedMotor(MotorPort.B);
+  private static final EV3LargeRegulatedMotor x = new EV3LargeRegulatedMotor(MotorPort.A);
+  private static final EV3MediumRegulatedMotor pen = new EV3MediumRegulatedMotor(MotorPort.C);
+  private static final EV3LargeRegulatedMotor y = new EV3LargeRegulatedMotor(MotorPort.B);
 
-  private static final int speed = 100;
+  private static final int speed = 50;
+  private static PenState penState = PenState.DOWN;
 
   public static void init() {
     x.setSpeed(speed);
-    y.setSpeed(speed);
-    pen.setSpeed(100);
+    y.setSpeed(speed * 2);
+    pen.setSpeed(speed);
+  }
+
+  private static void SwitchPenState() {
+    penState = penState == PenState.DOWN ? PenState.UP : PenState.DOWN;
   }
 
   public static void MoveIndefiniteX() {
@@ -22,6 +27,10 @@ public class MotorManager {
   }
 
   public static void MoveIndefiniteY() {
+    y.forward();
+  }
+
+  public static void MoveInverseY() {
     y.backward();
   }
 
@@ -33,7 +42,18 @@ public class MotorManager {
     y.rotate(-dist);
   }
 
-  public static void MovePen() {
+  // correctPenState - only to be used during setup to sync internal pen state and physical state
+  public static void MovePen(boolean correctPenState) {
     pen.rotate(180);
+
+    if (correctPenState) SwitchPenState();
+  }
+
+  public static void StopX() {
+    x.stop();
+  }
+
+  public static void StopY() {
+    y.stop();
   }
 }

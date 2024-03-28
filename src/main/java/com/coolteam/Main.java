@@ -1,22 +1,39 @@
 package com.coolteam;
 
-import com.coolteam.behaviours.Autostop;
-import com.coolteam.behaviours.Center;
-import com.coolteam.behaviours.StopBehaviour;
+import com.coolteam.behaviours.*;
+import lejos.hardware.Button;
 import lejos.hardware.lcd.LCD;
 import lejos.robotics.subsumption.Arbitrator;
 import lejos.robotics.subsumption.Behavior;
 
 public class Main {
   public static void main(String[] args) {
+    LCD.clear();
 
-    MotorManager.init();
-    SensorManager.init();
+    while (Button.ENTER.isUp()) {
+      LCD.drawString("Legionnaire Robot", 0, 2);
+      LCD.drawString("Gabriel & Harry", 0, 3);
+      LCD.drawString("Kasper & Artem", 0, 4);
+      LCD.drawString("Version 0.9-alpha", 0, 5);
+
+      try {
+        Thread.sleep(100);
+      } catch (InterruptedException e) {
+        throw new RuntimeException(e);
+      }
+    }
 
     LCD.clear();
 
     Arbitrator a =
-        new Arbitrator(new Behavior[] {new Center(), new Autostop(), new StopBehaviour()});
+        new Arbitrator(
+            new Behavior[] {
+              new MorseCode(),
+              new EtcherSketcher(),
+              new Center(),
+              new LowBatteryCheck(),
+              new StopBehaviour()
+            });
     a.go();
   }
 }
