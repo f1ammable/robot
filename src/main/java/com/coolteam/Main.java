@@ -28,11 +28,9 @@ public class Main {
     Arbitrator a =
         new Arbitrator(
             new Behavior[] {
-              new MorseCode(),
-              new EtcherSketcher(),
-              new Center(),
-              new LowBatteryCheck(),
-              new StopBehaviour()
+              new MorseCode(), new EtcherSketcher(), new Center(), new LowBatteryCheck(),
+              // TODO: Calibrate gyro to differentiate between aggressive and light shaking
+              // new StopBehaviour()
             });
     a.go();
   }
