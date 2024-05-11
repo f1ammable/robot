@@ -43,7 +43,7 @@ public class EtcherSketcher implements Behavior {
       }
 
       if ((button & Button.ID_ENTER) != 0) {
-        MotorManager.MovePen(false);
+        MotorManager.MovePen();
         Delay.msDelay(500);
       }
 

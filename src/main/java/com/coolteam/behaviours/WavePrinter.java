@@ -82,7 +82,7 @@ public class WavePrinter implements Behavior {
   @Override
   public void action() {
     suppressed = false;
-    MotorManager.MovePen(false);
+    MotorManager.MovePen();
     MotorManager.MoveInverseY();
 
     // Initialize variables for smoothing

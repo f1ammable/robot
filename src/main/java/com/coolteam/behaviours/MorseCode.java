@@ -68,14 +68,14 @@ public class MorseCode implements Behavior {
       // MotorManager.MovePen(false); // Ensure pen is down
       if (x == 0) {
         // Draw a dot
-        MotorManager.MovePen(false);
+        MotorManager.MovePen();
         MotorManager.MoveY(5); // Adjust the distance as needed
-        MotorManager.MovePen(false);
+        MotorManager.MovePen();
       } else if (x == 1) {
         // Draw a long line
-        MotorManager.MovePen(false);
+        MotorManager.MovePen();
         MotorManager.MoveY(30); // Adjust the distance as needed
-        MotorManager.MovePen(false);
+        MotorManager.MovePen();
       }
 
       MotorManager.MoveY(100); // Move to the next position, leaving space between symbols

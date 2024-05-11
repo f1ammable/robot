@@ -19,7 +19,7 @@ public class MotorManager {
   }
 
   private static void SwitchPenState() {
-    penState = penState == PenState.DOWN ? PenState.UP : PenState.DOWN;
+    penState = penState.next();
   }
 
   public static void MoveIndefiniteX() {
@@ -43,10 +43,13 @@ public class MotorManager {
   }
 
   // correctPenState - only to be used during setup to sync internal pen state and physical state
-  public static void MovePen(boolean correctPenState) {
-    pen.rotate(180);
+  public static void MovePen() {
+    SwitchPenState();
+  }
 
-    if (correctPenState) SwitchPenState();
+  // s - Current pen position as specificied by the user
+  public static void SyncPenState(PenState s) {
+    penState = s;
   }
 
   public static void StopX() {

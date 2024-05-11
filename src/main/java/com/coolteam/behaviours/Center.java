@@ -1,11 +1,11 @@
 package com.coolteam.behaviours;
 
 import com.coolteam.MotorManager;
+import com.coolteam.PenState;
 import com.coolteam.SensorManager;
 import lejos.hardware.Button;
 import lejos.hardware.lcd.LCD;
 import lejos.robotics.subsumption.Behavior;
-import lejos.utility.Delay;
 
 public class Center implements Behavior {
   private boolean needsCentering = true;
@@ -33,10 +33,16 @@ public class Center implements Behavior {
   private void calibratePen() {
     LCD.clear();
     try {
-      LCD.drawString("Press UP/DOWN for motor pos!", 0, 3);
+      LCD.drawString("What position is the pen in?", 0, 3);
 
-      Delay.msDelay(3500);
-      if (Button.UP.isDown()) MotorManager.MovePen(true);
+      // TODO: why delay??
+      // Delay.msDelay(3500);
+
+      if (Button.UP.isDown()) {
+        MotorManager.SyncPenState(PenState.UP);
+      } else if (Button.DOWN.isDown()) {
+        MotorManager.SyncPenState(PenState.DOWN);
+      }
 
       Thread.sleep(100);
     } catch (InterruptedException e) {
@@ -53,7 +59,7 @@ public class Center implements Behavior {
   public void action() {
     centerPen();
     centerPaper();
-    // calibratePen();
+    calibratePen();
     needsCentering = false;
   }
 
